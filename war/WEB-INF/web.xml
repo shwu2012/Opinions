@@ -30,4 +30,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>voteapp</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>facebook_login</servlet-name>
+		<servlet-class>edu.sjsu.students.shuangwu.opinions.web.FacebookLoginServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>facebook_login</servlet-name>
+		<url-pattern>/facebook_login</url-pattern>
+	</servlet-mapping>
 </web-app>

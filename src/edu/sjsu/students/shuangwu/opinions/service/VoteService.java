@@ -23,11 +23,9 @@ public interface VoteService {
 	 */
 	VoteTopic getVoteTopicById(long voteTopicId);
 
-	List<VoteTopic> getVoteTopicsByInitiator(long userId);
+	List<VoteTopic> getVoteTopicsByInitiator(String userEmail);
 
-	List<VoteTopic> getVoteTopicsByVoter(long userId);
-
-	VoteTopic pickRandomVoteTopicForUser(long userId);
+	VoteTopic pickRandomVoteTopicForUser(String userEmail);
 	
 	
 }

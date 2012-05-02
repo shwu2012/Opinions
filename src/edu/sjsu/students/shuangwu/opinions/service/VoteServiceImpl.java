@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
+
 import edu.sjsu.students.shuangwu.opinions.dao.UserDao;
 import edu.sjsu.students.shuangwu.opinions.dao.VoteOptionDao;
 import edu.sjsu.students.shuangwu.opinions.dao.VoteTopicDao;
@@ -48,19 +50,18 @@ public class VoteServiceImpl implements VoteService {
 	}
 
 	@Override
-	public List<VoteTopic> getVoteTopicsByInitiator(long userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<VoteTopic> getVoteTopicsByInitiator(String userEmail) {
+		List<VoteTopic> voteTopics = Lists.newArrayList();
+		User user = userDao.getByEmail(userEmail);
+		if (user != null) {
+			voteTopics.addAll(user.getVoteTopics());
+			LOGGER.info("add vote topics:" + voteTopics.size());
+		}
+		return voteTopics;
 	}
 
 	@Override
-	public List<VoteTopic> getVoteTopicsByVoter(long userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public VoteTopic pickRandomVoteTopicForUser(long userId) {
+	public VoteTopic pickRandomVoteTopicForUser(String userEmail) {
 		// TODO Auto-generated method stub
 		return null;
 	}

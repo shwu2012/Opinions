@@ -6,14 +6,14 @@
 <html lang="en">
 <head>
 <meta charset=utf-8 />
-<title>Welcome Page</title>
+<title>Ask questions and share opinions!</title>
+<link type="text/css" rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-	<h1>Your question is ready!</h1>
-	<ul>
-		<c:forEach items="${voteTopics}" var="voteTopic" varStatus="status">
-			<li><c:out value="${voteTopic.text}" /></li>
-		</c:forEach>
-	</ul>
+<jsp:include page="_header.jsp"/>
+<div class="content">
+<h1>Your question is published!</h1>
+</div>
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>

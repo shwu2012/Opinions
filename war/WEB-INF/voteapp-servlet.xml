@@ -16,6 +16,9 @@
 			type="edu.sjsu.students.shuangwu.opinions.service.VoteService" ref="voteService" />
 		<constructor-arg
 			type="edu.sjsu.students.shuangwu.opinions.service.UserService" ref="userService" />
+		<constructor-arg
+			type="edu.sjsu.students.shuangwu.opinions.validator.UserValidator"
+			ref="userValidator" />
 	</bean>
 
 
@@ -68,4 +71,12 @@
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource"
 		p:basename="messages" />
+
+	<bean id="userValidator"
+		class="edu.sjsu.students.shuangwu.opinions.validator.UserValidator">
+		<property name="emailAddressValidator" ref="emailAddressValidator" />
+	</bean>
+
+	<bean id="emailAddressValidator"
+		class="edu.sjsu.students.shuangwu.opinions.validator.EmailAddressValidator" />
 </beans>

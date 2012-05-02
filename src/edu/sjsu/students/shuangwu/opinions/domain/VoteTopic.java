@@ -27,8 +27,17 @@ public class VoteTopic {
 
 	@Persistent
 	private String description;
+	
+	@Persistent
+	private Gender gender;
+	
+	@Persistent
+	private boolean friendOnly;
+	
+	@Persistent
+	private VoteStatus status;
 
-	@Persistent(mappedBy = "voteTopic")
+	@Persistent(mappedBy = "voteTopic", defaultFetchGroup="true")
 	private List<VoteOption> options;
 
 	public String getEncodedKey() {
@@ -77,6 +86,30 @@ public class VoteTopic {
 
 	public void setOptions(List<VoteOption> options) {
 		this.options = options;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public boolean isFriendOnly() {
+		return friendOnly;
+	}
+
+	public void setFriendOnly(boolean friendOnly) {
+		this.friendOnly = friendOnly;
+	}
+
+	public VoteStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(VoteStatus status) {
+		this.status = status;
 	}
 
 }

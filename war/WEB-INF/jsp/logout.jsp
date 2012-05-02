@@ -6,10 +6,14 @@
 <html lang="en">
 <head>
 <meta charset=utf-8 />
-<title>Logout</title>
+<title>Ask questions and share opinions!</title>
+<link type="text/css" rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+<jsp:include page="_header.jsp"/>
+<div class="content">
 <h1>See you later <c:out value="${logoutUserName}" />!</h1>
-<a href="/login.do">login again?</a>
+</div>
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>

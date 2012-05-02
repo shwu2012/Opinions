@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,12 +14,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.common.collect.Lists;
 
-import edu.sjsu.students.shuangwu.opinions.domain.Gender;
 import edu.sjsu.students.shuangwu.opinions.domain.User;
 import edu.sjsu.students.shuangwu.opinions.domain.VoteOption;
+import edu.sjsu.students.shuangwu.opinions.domain.VoteStatus;
 import edu.sjsu.students.shuangwu.opinions.domain.VoteTopic;
 import edu.sjsu.students.shuangwu.opinions.service.UserService;
 import edu.sjsu.students.shuangwu.opinions.service.VoteService;
+import edu.sjsu.students.shuangwu.opinions.validator.UserValidator;
 
 @Controller
 @SessionAttributes("loginUser")
@@ -28,10 +30,13 @@ public class VoteAppController {
 
 	private final VoteService voteService;
 	private final UserService userService;
+	private final UserValidator userValidator;
 
-	public VoteAppController(VoteService voteService, UserService userService) {
+	public VoteAppController(VoteService voteService, UserService userService,
+			UserValidator userValidator) {
 		this.voteService = voteService;
 		this.userService = userService;
+		this.userValidator = userValidator;
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
@@ -42,9 +47,10 @@ public class VoteAppController {
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public ModelAndView loginHandler(String userKey) {
-		ModelAndView mv = new ModelAndView("index");
+		ModelAndView mv = null;
 		User loginUser = userService.getUser(userKey);
 		if (loginUser != null) {
+			mv = new ModelAndView("redirect:/vote.do");
 			mv.addObject("loginUser", loginUser); // add to session
 		} else {
 			mv = new ModelAndView("redirect:/login.do?no_such_user");
@@ -58,42 +64,36 @@ public class VoteAppController {
 		ModelAndView mv = new ModelAndView("logout");
 		mv.addObject("logoutUserName", loginUser.getName());
 		status.setComplete(); // clean the session
-		return mv;
-	}
-
-	@RequestMapping("/index.do")
-	public ModelAndView indexHandler() {
-		ModelAndView mv = new ModelAndView("index");
+		mv.addObject("loginUser", null);
 		return mv;
 	}
 
 	@RequestMapping(value = "/register.do", method = RequestMethod.GET)
 	public ModelAndView registerHandler() {
 		ModelAndView mv = new ModelAndView("register");
+		User newUser = new User();
+		mv.addObject("newUser", newUser);
 		return mv;
 	}
 
 	@RequestMapping(value = "/register.do", method = RequestMethod.POST)
-	public ModelAndView registerHandler(String email, String name, String gender) {
-		User user = new User();
-		user.setEmail(email);
-		user.setName(name);
-		user.setGender(Gender.valueOf(gender));
-		User newUser = userService.createUser(user);
-		if (newUser != null) { // create ok
-			return new ModelAndView("redirect:/login.do?from=new_user");
+	public String registerHandler(@ModelAttribute("newUser") User newUser,
+			BindingResult result) {
+		userValidator.validate(newUser, result);
+		if (result.hasErrors()) {
+			LOGGER.info("new user has errors!");
+			return "register";
+		}
+		if (userService.createUser(newUser) != null) { // create ok
+			return "redirect:/login.do?from=new_user";
 		} else { // failed
-			return new ModelAndView(
-					"redirect:/register.do?from=duplicated_user");
+			return "redirect:/register.do?from=duplicated_user";
 		}
 	}
 
 	@RequestMapping(value = "/ask.do", method = RequestMethod.GET)
 	public ModelAndView askHandler(@ModelAttribute("loginUser") User loginUser) {
 		ModelAndView mv = new ModelAndView("ask");
-		List<VoteTopic> voteTopics = userService.getUser(loginUser.getEmail())
-				.getVoteTopics();
-		mv.addObject("voteTopics", voteTopics);
 		return mv;
 	}
 
@@ -113,6 +113,8 @@ public class VoteAppController {
 			}
 		}
 		v.setOptions(optionList);
+		v.setFriendOnly(false);
+		v.setStatus(VoteStatus.ACTIVE);
 		voteService.createVote(v, loginUser.getEmail());
 		List<VoteTopic> voteTopics = userService.getUser(loginUser.getEmail())
 				.getVoteTopics();
@@ -123,28 +125,29 @@ public class VoteAppController {
 	@RequestMapping("/vote.do")
 	public ModelAndView voteHandler() {
 		ModelAndView mv = new ModelAndView("vote");
-		mv.addObject("visitorName", "Shuang <i>Wu</i>");
+		// get random vote
 		return mv;
 	}
 
 	@RequestMapping("/results.do")
-	public ModelAndView resultsHandler() {
-		ModelAndView mv = new ModelAndView("result");
-		mv.addObject("visitorName", "Shuang <i>Wu</i>");
+	public ModelAndView resultsHandler(
+			@ModelAttribute("loginUser") User loginUser) {
+		ModelAndView mv = new ModelAndView("results");
+		List<VoteTopic> voteTopics = voteService
+				.getVoteTopicsByInitiator(loginUser.getEmail());
+		mv.addObject("voteTopics", voteTopics);
 		return mv;
 	}
 
 	@RequestMapping("/profile.do")
 	public ModelAndView profileHandler() {
 		ModelAndView mv = new ModelAndView("profile");
-		mv.addObject("visitorName", "Shuang <i>Wu</i>");
 		return mv;
 	}
 
 	@RequestMapping("/friends.do")
 	public ModelAndView friendsHandler() {
 		ModelAndView mv = new ModelAndView("friends");
-		mv.addObject("visitorName", "Shuang <i>Wu</i>");
 		return mv;
 	}
 }

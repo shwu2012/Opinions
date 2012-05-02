@@ -6,10 +6,13 @@
 <html lang="en">
 <head>
 <meta charset=utf-8 />
-<title>Welcome Page</title>
+<title>Ask questions and share opinions!</title>
+<link type="text/css" rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-<h1>welcome, <c:out value="${loginUser.name}"/>!</h1>
+<jsp:include page="_header.jsp"/>
+<div class="content">
+<h1>Ask a question?</h1>
 <form action="/ask.do" method="post">
 	Title: <input type="text" name="title" /><br />
 	Desc: <input type="text" name="description" /><br />
@@ -22,15 +25,7 @@
 	<input type="text" name="options" /><br />
 	<input type="submit" value="Ask" />
 </form>
-
-<h1>Your questions</h1>
-<ul>
-	<c:forEach items="${voteTopics}" var="voteTopic" varStatus="status">
-		<li><c:out value="${voteTopic.text}" /></li>
-	</c:forEach>
-</ul>
-
-	<a href="/index.do">Back to home</a>
-<a href="/logout.do">Logout</a>
+</div>
+<jsp:include page="_footer.jsp"/>
 </body>
 </html>

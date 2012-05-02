@@ -1,0 +1,162 @@
+/* copy from sjsu.edu */
+html, body, * {
+	margin:0;
+	padding:0;
+}
+
+body {
+	background:#e2dacf;
+	font-family: verdana,helvetica,arial,sans-serif;
+	font-size: 12px;
+	color:#333333;
+}
+
+section, article, header, footer, nav, aside, hgroup {
+	display: block;
+}
+
+header, footer {
+	background-color: #4D90FE;
+	padding: 10px;
+	margin: 0;
+	color: white;
+	font-size: 90%;
+}
+
+header, footer {
+	background-color: #4D90FE;
+	padding: 10px;
+	margin: 0;
+	color: white;
+	font-size: 90%;
+}
+
+header a, footer a {
+	color: white;
+}
+
+ul {
+	margin-bottom:1.364em;
+	padding-left: 1.364em;
+	list-style:disc;
+}
+
+ul li {
+	padding-bottom: 1em;
+	line-height:1.5;
+}
+
+ol li {
+	padding-top: 1em;
+	line-height:1.5;
+}
+
+ul li a {
+	font:normal 0.909em/1.364em Verdana, Geneva, sans-serif;
+	color:#333333;
+}
+
+ul li ul li a {
+	color:#333333;
+}
+
+ul li a:hover, ul li a:focus {
+	color:#4D4D4D;
+	border-bottom:dotted 1px #333333;
+}
+
+ol{
+	margin-left:.5em;
+	margin-bottom:1.364em;
+}
+
+ol li{
+	margin-left:1.364em;
+}
+
+blockquote {
+	margin: 0 1.5em;
+	padding: 0 0.5em;
+}
+
+input[type="text"] {
+	font:normal 1em/1.7em "Times New Roman", Times, serif;
+	color:#333333;
+	border: 1px solid #999;
+	padding: 0.091em 0.364em;
+	-moz-box-shadow: 3px 3px 7px #eee;
+	-webkit-box-shadow: 3px 3px 7px #eee;
+	box-shadow: inset 2px 2px 3px #ddd;
+}
+
+input[type="submit"] {
+	padding: 2px 5px;
+	margin: 3px;
+}
+
+a, 
+a:visited, 
+a:hover, 
+a:active, 
+a:focus {
+	direction:ltr;
+	outline:0;
+}
+
+h1 {
+	font:italic bold 1.273em/2.273em Georgia, "Times New Roman", Times, serif;
+	color:#333333;
+	margin:5px;
+	padding:5px;
+}
+
+h2 {
+	font:italic bold 1.273em/1.8em Georgia, "Times New Roman", Times, serif;
+	color:#333333;
+	margin:3px;
+	padding:3px;
+}
+
+h3, h3 a {
+	font:bold 1.091em/1.7em Verdana, Geneva, sans-serif;
+	color:#5D594B;
+	padding-bottom:0.1em;
+}
+
+h3 a {
+	font:bold 1em/1.5em Verdana, Geneva, sans-serif; /*2011-11-08 cjo only moved to this location*/
+	color:#5D594B;
+	text-transform:uppercase;
+}
+
+/* page layout */
+
+div.content {
+	margin: 0 auto;
+	padding: 0 5px;
+	width: 990px;
+	background-color: white;
+	min-height: 500px;
+}
+
+div.content :first-child, div.content :first-child :first-child {
+    margin-top: 0;
+}
+
+div.content :last-child, div.content :last-child :last-child {
+    margin-bottom: 0;
+}
+
+table.alignment td {
+	padding: 3px 5px;
+}
+
+table.alignment label {
+	padding-right: 10px;
+}
+
+.errorinfo {
+	color: red;
+	font-style: italic;
+	background-color: #fff8dc;
+}

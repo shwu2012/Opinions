@@ -15,29 +15,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user) {
-		User persistentUser = null;
-		if (userDao.getByEmail(user.getEmail()) == null) {
+	public User getOrCreateUser(User user) {
+		User persistentUser = userDao.getById(user.getUserId());
+		if (persistentUser == null) {
 			persistentUser = userDao.create(user);
+		} else {
+			persistentUser.setAccessToken(user.getAccessToken());
+			persistentUser.setName(user.getName());
+			persistentUser.setGender(user.getGender());
 		}
 		return persistentUser;
 	}
 
 	@Override
-	public User modifyUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean authenticateUser(String loginEmail, String password) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public User getUser(String email) {
-		return userDao.getByEmail(email);
+	public User getUser(String id) {
+		return userDao.getById(id);
 	}
 
 }

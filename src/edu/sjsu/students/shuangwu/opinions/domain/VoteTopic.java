@@ -11,13 +11,13 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable(detachable = "true")
 public class VoteTopic {
 	@PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    @Extension(vendorName="datanucleus", key="gae.encoded-pk", value="true")
-    private String encodedKey;
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	@Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+	private String encodedKey;
 
-    @Persistent
-    @Extension(vendorName="datanucleus", key="gae.pk-id", value="true")
-    private Long keyId;
+	@Persistent
+	@Extension(vendorName = "datanucleus", key = "gae.pk-id", value = "true")
+	private Long keyId;
 
 	@Persistent
 	private User user;
@@ -27,17 +27,14 @@ public class VoteTopic {
 
 	@Persistent
 	private String description;
-	
-	@Persistent
-	private Gender gender;
-	
-	@Persistent
-	private boolean friendOnly;
-	
+
 	@Persistent
 	private VoteStatus status;
 
-	@Persistent(mappedBy = "voteTopic", defaultFetchGroup="true")
+	@Persistent
+	private String imageBlobId;
+
+	@Persistent(mappedBy = "voteTopic", defaultFetchGroup = "true")
 	private List<VoteOption> options;
 
 	public String getEncodedKey() {
@@ -88,28 +85,20 @@ public class VoteTopic {
 		this.options = options;
 	}
 
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
-	public boolean isFriendOnly() {
-		return friendOnly;
-	}
-
-	public void setFriendOnly(boolean friendOnly) {
-		this.friendOnly = friendOnly;
-	}
-
 	public VoteStatus getStatus() {
 		return status;
 	}
 
 	public void setStatus(VoteStatus status) {
 		this.status = status;
+	}
+
+	public String getImageBlobId() {
+		return imageBlobId;
+	}
+
+	public void setImageBlobId(String imageBlobId) {
+		this.imageBlobId = imageBlobId;
 	}
 
 }

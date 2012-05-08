@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://java.sun.com/xml/ns/javaee"
-xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-
 		<param-value>/WEB-INF/applicationContext.xml</param-value>
-		<!--
-		<param-value>/WEB-INF/applicationContext-jdbc.xml</param-value>
-		<param-value>/WEB-INF/applicationContext-hibernate.xml</param-value>
-		<param-value>/WEB-INF/applicationContext-jpa.xml</param-value>
-		-->
 	</context-param>
-	
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<servlet>
 		<servlet-name>voteapp</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -30,14 +24,25 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>voteapp</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
-		<servlet-name>facebook_login</servlet-name>
-		<servlet-class>edu.sjsu.students.shuangwu.opinions.web.FacebookLoginServlet</servlet-class>
+		<servlet-name>Upload</servlet-name>
+		<servlet-class>edu.sjsu.students.shuangwu.opinions.web.BlobStoreUpload</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>Serve</servlet-name>
+		<servlet-class>edu.sjsu.students.shuangwu.opinions.web.BlobStoreServe</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>facebook_login</servlet-name>
-		<url-pattern>/facebook_login</url-pattern>
+		<servlet-name>Upload</servlet-name>
+		<url-pattern>/upload</url-pattern>
 	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Serve</servlet-name>
+		<url-pattern>/serve</url-pattern>
+	</servlet-mapping>
+
 </web-app>

@@ -1,6 +1,10 @@
 package edu.sjsu.students.shuangwu.opinions.dao;
 
+import java.util.List;
+
+import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 
 import org.apache.log4j.Logger;
 
@@ -17,15 +21,19 @@ public class VoteOptionDaoGaeImpl implements VoteOptionDao {
 	}
 
 	@Override
-	public VoteOption create(VoteOption voteOption) {
-		LOGGER.debug("calling VoteOptionDaoGaeImpl.create()");
-		return null;
-	}
-
-	@Override
-	public VoteOption getById(long voteOptionId) {
-		// TODO Auto-generated method stub
-		return null;
+	public VoteOption getById(String voteOptionEncodedId) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Query query = pm.newQuery(VoteOption.class);
+		query.setFilter("encodedKey == idParam");
+		query.declareParameters("String idParam");
+		List<VoteOption> results = (List<VoteOption>) query
+				.execute(voteOptionEncodedId);
+		VoteOption voteOption = null;
+		if (!results.isEmpty()) {
+			voteOption = results.get(0);
+		}
+		query.closeAll();
+		return voteOption;
 	}
 
 }

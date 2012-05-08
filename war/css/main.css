@@ -4,6 +4,10 @@ html, body, * {
 	padding:0;
 }
 
+html, body {
+	height:100%;
+}
+
 body {
 	background:#e2dacf;
 	font-family: verdana,helvetica,arial,sans-serif;
@@ -15,25 +19,30 @@ section, article, header, footer, nav, aside, hgroup {
 	display: block;
 }
 
-header, footer {
+header {
 	background-color: #4D90FE;
-	padding: 10px;
+	padding: 2px;
 	margin: 0;
 	color: white;
 	font-size: 90%;
 }
 
-header, footer {
-	background-color: #4D90FE;
-	padding: 10px;
-	margin: 0;
+header a {
 	color: white;
-	font-size: 90%;
 }
 
-header a, footer a {
-	color: white;
+header img {
+	border: 1px solid #ddd;
+	width: 25px;	
+	height: 25px;
+	margin: 0px 5px;
 }
+
+footer {
+	padding: 20px;
+	text-align: center;
+	color: #4D90FE;	
+} 
 
 ul {
 	margin-bottom:1.364em;
@@ -42,13 +51,11 @@ ul {
 }
 
 ul li {
-	padding-bottom: 1em;
-	line-height:1.5;
+	line-height:1.25;
 }
 
 ol li {
-	padding-top: 1em;
-	line-height:1.5;
+	line-height:1.25;
 }
 
 ul li a {
@@ -89,8 +96,8 @@ input[type="text"] {
 	box-shadow: inset 2px 2px 3px #ddd;
 }
 
-input[type="submit"] {
-	padding: 2px 5px;
+input[type="submit"], button {
+	padding: 2px 6px;
 	margin: 3px;
 }
 
@@ -132,11 +139,11 @@ h3 a {
 /* page layout */
 
 div.content {
-	margin: 0 auto;
+	margin: auto;
 	padding: 0 5px;
 	width: 990px;
 	background-color: white;
-	min-height: 500px;
+	min-height: 600px;
 }
 
 div.content :first-child, div.content :first-child :first-child {
@@ -147,16 +154,59 @@ div.content :last-child, div.content :last-child :last-child {
     margin-bottom: 0;
 }
 
-table.alignment td {
+table.alignment td, table.alignment th {
 	padding: 3px 5px;
+	vertical-align: top;
 }
 
 table.alignment label {
 	padding-right: 10px;
 }
 
+table.alignment td div {
+	margin: 5px 0px;
+}
+
 .errorinfo {
 	color: red;
 	font-style: italic;
 	background-color: #fff8dc;
+}
+
+div.errorinfo {
+	color: red;
+	font-style: italic;
+	background-color: #fff8dc;
+	margin: 10px;
+	padding: 5px;
+	border: 1px solid #ccc;
+}
+
+.entity_item {
+	border-bottom: 1px solid #4D90FE;
+	border-top: 1px solid #4D90FE;
+	margin: 10px;
+	padding: 0 0 10px 0; 
+}
+
+.entity_item ul {
+	margin: 5px 5px 5px 50px;
+	line-height: 1.2;
+}
+
+.entity_item h2 {
+	color: white;
+	background-color: #4D90FE;
+	margin: 0;
+}
+
+.entity_item p {
+	background-color: #eee;
+	margin: 5px 0px 5px 40px;
+	padding: 5px;
+	line-height: 1.25;
+}
+
+.entity_item .tools {
+	font-size: 10px;
 }

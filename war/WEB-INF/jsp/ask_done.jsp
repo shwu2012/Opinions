@@ -12,7 +12,8 @@
 <body>
 <jsp:include page="_header.jsp"/>
 <div class="content">
-<h1>Your question is published!</h1>
+<h1>New question is published!</h1>
+<a href="/question.do?id=${voteTopic.encodedKey}">Have a look at this hot question!</a>
 </div>
 <jsp:include page="_footer.jsp"/>
 </body>

@@ -5,6 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
+	<!-- Include basic annotation support -->
+	<context:annotation-config />
+
 	<!-- - The controllers are autodetected POJOs labeled with the @Controller 
 		annotation. -->
 	<!-- <context:component-scan base-package="edu.sjsu.students.shuangwu.opinions.web" 
@@ -12,15 +15,12 @@
 
 	<bean id="VoteAppController"
 		class="edu.sjsu.students.shuangwu.opinions.web.VoteAppController">
-		<constructor-arg
-			type="edu.sjsu.students.shuangwu.opinions.service.VoteService" ref="voteService" />
-		<constructor-arg
-			type="edu.sjsu.students.shuangwu.opinions.service.UserService" ref="userService" />
-		<constructor-arg
-			type="edu.sjsu.students.shuangwu.opinions.validator.UserValidator"
-			ref="userValidator" />
+		<property name="voteService" ref="voteService" />
+		<property name="userService" ref="userService" />
+		<property name="fbApiKey" value="217557015023052" />
+		<property name="fbApiSecret" value="95e9f86c79ae95a9937be07704d94e0f" />
+		<property name="fbLoginCallbackUrl" value="http://localhost:8888/facebookLogin.do" />
 	</bean>
-
 
 	<bean id="annotationMapper"
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
@@ -39,7 +39,9 @@
 		<property name="publicUrls">
 			<set>
 				<value>/login.do</value>
-				<value>/register.do</value>
+				<value>/question.do</value>
+				<value>/facebookLogin.do</value>
+				<value>/facebookAppCanvas.do</value>
 			</set>
 		</property>
 	</bean>
@@ -79,4 +81,10 @@
 
 	<bean id="emailAddressValidator"
 		class="edu.sjsu.students.shuangwu.opinions.validator.EmailAddressValidator" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="500000" />
+	</bean>
 </beans>

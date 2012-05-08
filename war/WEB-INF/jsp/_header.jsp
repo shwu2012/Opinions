@@ -2,15 +2,16 @@
 <header>
 <c:choose>
     <c:when test="${empty loginUser}">
-        <a href="/register.do">Register</a> | 
+        <img src="/image/default_user_image.jpg" /> 
+    	Hello, Guest | 
         <a href="/login.do">Login</a>
     </c:when>
     <c:otherwise>
-        Hello, <a href="/profile.do"><c:out value="${loginUser.name}" /></a> |
+    	<img src="https://graph.facebook.com/${loginUser.externalId}/picture" /> 
+        Hello, <c:out value="${loginUser.name}" /> | 
         <a href="/ask.do">Ask a question</a> | 
-  		<a href="/vote.do">Share opinions</a> | 
+  		<a href="/question.do">Share opinions</a> | 
   		<a href="/results.do">My questions</a> |
-  		<a href="/friends.do">Friends</a> | 
         <a href="/logout.do">Logout</a>
     </c:otherwise>
 </c:choose>

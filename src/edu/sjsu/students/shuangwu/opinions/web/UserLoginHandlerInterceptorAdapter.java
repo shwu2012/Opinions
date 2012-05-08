@@ -26,16 +26,11 @@ public class UserLoginHandlerInterceptorAdapter extends
 			// unauthorized user can access public URLs
 			LOGGER.debug("unauthorized user can access public URLs");
 			return true;
-		} else if ((loginUserInSession != null) && publicUrls.contains(uri)) {
-			// authorized user cannot access public URLs, will go to home page
-			LOGGER.debug("authorized user cannot access public URLs, will go to home page");
-			response.sendRedirect("/index.do?from=authorized_user");
-			return false;
 		} else if ((loginUserInSession == null) && (!publicUrls.contains(uri))) {
 			// unauthorized user cannot access non-public URLs, will go to login
 			// page
 			LOGGER.debug("unauthorized user cannot access non-public URLs, will go to login page");
-			response.sendRedirect("/login.do?from=unauthorized_user");
+			response.sendRedirect("/login.do");
 			return false;
 		} else {
 			return true;

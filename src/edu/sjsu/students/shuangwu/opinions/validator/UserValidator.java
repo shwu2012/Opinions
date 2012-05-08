@@ -25,10 +25,11 @@ public class UserValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender",
 				"user.gender.required", "Please select gender");
 		// validate email
-		errors.pushNestedPath("email");
-		ValidationUtils.invokeValidator(emailAddressValidator, user.getEmail(),
-				errors);
-		errors.popNestedPath();
+		// errors.pushNestedPath("email");
+		// ValidationUtils.invokeValidator(emailAddressValidator,
+		// user.getEmail(),
+		// errors);
+		// errors.popNestedPath();
 	}
 
 	public void setEmailAddressValidator(Validator emailAddressValidator) {

@@ -4,5 +4,6 @@ import edu.sjsu.students.shuangwu.opinions.domain.User;
 
 public interface UserDao {
 	User create(User user);
-	User getByEmail(String email);
+	User getById(String id);
+	User getRandomUserHavingVoteTopics();
 }

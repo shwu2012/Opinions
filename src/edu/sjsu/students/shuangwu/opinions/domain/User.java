@@ -13,13 +13,22 @@ public class User implements Serializable {
 
 	@PrimaryKey
 	@Persistent
-	private String email;
-	
+	private String userId;
+
+	@Persistent
+	private String externalId;
+
+	@Persistent
+	private LoginType loginType;
+
 	@Persistent
 	private String name;
 
 	@Persistent
 	private Gender gender;
+
+	@Persistent
+	private String accessToken;
 
 	@Persistent(mappedBy = "user")
 	private List<VoteTopic> voteTopics;
@@ -48,12 +57,35 @@ public class User implements Serializable {
 		this.voteTopics = voteTopics;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public String getExternalId() {
+		return externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
+
+	public LoginType getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(LoginType loginType) {
+		this.loginType = loginType;
+	}
 }

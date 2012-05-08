@@ -15,9 +15,21 @@
 <div class="content">
 <h1>My questions</h1>
 <ul>
-	<c:forEach items="${voteTopics}" var="voteTopic" varStatus="status">
-		<li><a href="/question.do?id=<c:out value="${voteTopic.keyId}" />"><c:out value="${voteTopic.text}" /> (${fn:length(voteTopic.options)} options)</a></li>
-	</c:forEach>
+<c:forEach items="${voteTopics}" var="voteTopic" varStatus="status">
+	<div class="entity_item">
+		<h2><c:out value="${voteTopic.text}" /></h2>
+		<p><c:out value="${voteTopic.description}" /></p>
+		<ul>
+		<c:forEach items="${voteTopic.options}" var="voteOption" varStatus="status">
+		  <li><c:out value="${voteOption.text}" /> (${fn:length(voteOption.actions)} Votes)</li>
+		</c:forEach>  
+		</ul>
+		<div class="tools">
+			<a href="/question.do?id=${voteTopic.encodedKey}&view=true">View</a> |
+			<a href="/question.do?id=${voteTopic.encodedKey}">Vote</a>  
+ 		</div>
+	</div>
+</c:forEach>
 </ul>
 </div>
 <jsp:include page="_footer.jsp"/>

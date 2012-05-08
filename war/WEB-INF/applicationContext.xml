@@ -19,6 +19,7 @@
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
 			<tx:method name="getOrCreateUser" propagation="REQUIRED" />
+			<tx:method name="create*" propagation="REQUIRED" />
 			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
@@ -26,9 +27,12 @@
 	<aop:config>
 		<aop:pointcut id="userServiceMethods"
 			expression="execution(* edu.sjsu.students.shuangwu.opinions.service.UserService.*(..))" />
+		<aop:pointcut id="voteServiceMethods"
+			expression="execution(* edu.sjsu.students.shuangwu.opinions.service.VoteService.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="voteServiceMethods" />
 	</aop:config>
- 
+
 	<bean id="persistenceManagerFactory"
 		class="org.springframework.orm.jdo.LocalPersistenceManagerFactoryBean">
 		<property name="persistenceManagerFactoryName" value="transactions-optional" />
@@ -69,8 +73,8 @@
 			type="edu.sjsu.students.shuangwu.opinions.dao.VoteTopicDao" ref="voteTopicDao" />
 		<constructor-arg
 			type="edu.sjsu.students.shuangwu.opinions.dao.VoteOptionDao" ref="voteOptionDao" />
-			<constructor-arg
-			type="edu.sjsu.students.shuangwu.opinions.dao.UserDao" ref="userDao" />
+		<constructor-arg type="edu.sjsu.students.shuangwu.opinions.dao.UserDao"
+			ref="userDao" />
 	</bean>
 
 	<bean id="userDao" class="edu.sjsu.students.shuangwu.opinions.dao.UserDaoGaeImpl">

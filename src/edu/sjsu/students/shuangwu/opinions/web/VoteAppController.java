@@ -181,12 +181,16 @@ public class VoteAppController {
 		v.setStatus(VoteStatus.ACTIVE);
 		v = voteService.createVoteTopic(v, loginUser.getUserId());
 		mv.addObject("voteTopic", v);
-
+		mv.addObject("fbApiKey", fbApiKey);
 		if (v != null) {
+			// post to wall
 			OAuthRequest request = new OAuthRequest(Verb.POST,
 					"https://graph.facebook.com/me/feed");
-			request.addBodyParameter("message",
+			request.addBodyParameter("link",
 					"http://localhost:8888/question.do?id=" + v.getEncodedKey());
+			request.addBodyParameter("name", v.getText());
+			request.addBodyParameter("message",
+					"Please share your opinions!");
 			facebookOAuthService
 					.signRequest(new Token(loginUser.getAccessToken(),
 							fbApiSecret), request);

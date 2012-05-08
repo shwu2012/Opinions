@@ -11,23 +11,6 @@
 <link type="text/css" rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-
-<!-- 
-<div id="fb-root"></div>
-      <script src="http://connect.facebook.net/en_US/all.js">
-      </script>
-      <script>
-         FB.init({ 
-            appId:'217557015023052', cookie:true, 
-            status:true, xfbml:true 
-         });
-
-         FB.ui({ method: 'apprequests', 
-            message: 'Here is a new Requests dialog...'});
-      </script>
--->
-
-
 <jsp:include page="_header.jsp"/>
 <div class="content">
 <h1>Question</h1>

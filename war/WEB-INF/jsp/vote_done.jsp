@@ -13,8 +13,10 @@
 <jsp:include page="_header.jsp"/>
 <div class="content">
 <h1>Your opinion is published!</h1>
-<a href="/question.do?id=${voteTopicEncodedKey}&view=true">Have a look at the previous question again.</a> <br/>
-Or <a href="/question.do">Try another question!</a>
+<ul>
+  <li><a href="/question.do?id=${voteTopicEncodedKey}&view=true">Have a look at the previous question again.</a></li>
+  <li><a href="/question.do">Try another question!</a></li>
+</ul>
 </div>
 <jsp:include page="_footer.jsp"/>
 </body>

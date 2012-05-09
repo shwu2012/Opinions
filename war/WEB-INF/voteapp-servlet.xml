@@ -19,7 +19,7 @@
 		<property name="userService" ref="userService" />
 		<property name="fbApiKey" value="217557015023052" />
 		<property name="fbApiSecret" value="95e9f86c79ae95a9937be07704d94e0f" />
-		<property name="fbLoginCallbackUrl" value="http://localhost:8888/facebookLogin.do" />
+		<property name="fbLoginCallbackUrl" value="http://localhost/facebookLogin.do" />
 	</bean>
 
 	<bean id="annotationMapper"

@@ -55,7 +55,13 @@ public class VoteServiceImpl implements VoteService {
 
 	@Override
 	public VoteTopic getVoteTopicById(String voteTopicEncodedId) {
-		return voteTopicDao.getById(voteTopicEncodedId);
+		VoteTopic voteTopic = voteTopicDao.getById(voteTopicEncodedId);
+		for (VoteOption o : voteTopic.getOptions()) {
+			for (VoteAction a : o.getActions()) {
+				// do nothing but to fetch all the vote actions
+			}
+		}
+		return voteTopic;
 	}
 
 	@Override

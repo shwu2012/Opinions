@@ -8,7 +8,7 @@
 <meta charset=utf-8 />
 <title>Ask questions and share opinions!</title>
 <link type="text/css" rel="stylesheet" href="css/main.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
 </head>
 <body>
 <jsp:include page="_header.jsp"/>

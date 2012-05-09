@@ -9,8 +9,19 @@
 <meta charset=utf-8 />
 <title>Ask questions and share opinions!</title>
 <link type="text/css" rel="stylesheet" href="css/main.css" />
+<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=217557015023052";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
 <jsp:include page="_header.jsp"/>
 <div class="content">
 <h1>Question</h1>
@@ -45,7 +56,7 @@
     <td>
     <ul>
     <c:forEach items="${voteTopic.options}" var="voteOption" varStatus="status">
-      <li><c:out value="${voteOption.text}" /></li>
+      <li><c:out value="${voteOption.text}" /> (${fn:length(voteOption.actions)} Votes)</li>
 	</c:forEach>
 	</ul>
     </td>
@@ -85,19 +96,35 @@
     <th>Options:</th>
     <td id="options_panel">
     <c:forEach items="${voteTopic.options}" var="voteOption" varStatus="status">
-      <div><label><input type="checkbox" name="optionIds" value="<c:out value="${voteOption.encodedKey}"/>" /> <c:out value="${voteOption.text}" /></label></div>
+      <div><label><input type="checkbox" name="optionIds" value="<c:out value="${voteOption.encodedKey}"/>" /> <c:out value="${voteOption.text}" /> (${fn:length(voteOption.actions)} Votes)</label></div>
 	</c:forEach>
     </td>
   </tr>
   <tr>
     <th>&nbsp;</th>
-    <td><input type="submit" value="Vote" /></td>
+    <td><input type="submit" value="Vote" /> <span id="checkedOptionsError" class="errorinfo"></td>
   </tr>
 </table>
 </form>
 
+<script>
+$('#vote_form').bind('submit', function(e){
+	var errorCount = 0;
+	var checkedOptions = $('#options_panel input:checked');
+	var passed = (checkedOptions.length > 0);
+	if (!passed) {
+		$('#checkedOptionsError').text('Please select at least one option.').show().fadeOut(5000);
+	} else {
+		$('#checkedOptionsError').hide();
+	}
+	return passed;
+});
+</script>
+
 </c:otherwise>
 </c:choose>
+
+<div class="fb-like" data-send="false" data-width="450" data-show-faces="true" data-href="http://localhost/question.do?id=${voteTopic.encodedKey}"></div>
 
 </div>
 <jsp:include page="_footer.jsp"/>

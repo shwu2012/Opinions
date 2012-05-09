@@ -21,7 +21,7 @@
 		<p><c:out value="${voteTopic.description}" /></p>
 		<ul>
 		<c:forEach items="${voteTopic.options}" var="voteOption" varStatus="status">
-		  <li><c:out value="${voteOption.text}" /> (${fn:length(voteOption.actions)} Votes)</li>
+		  <li><c:out value="${voteOption.text}" /></li>
 		</c:forEach>  
 		</ul>
 		<div class="tools">

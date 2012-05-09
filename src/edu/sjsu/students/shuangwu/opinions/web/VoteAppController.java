@@ -187,7 +187,7 @@ public class VoteAppController {
 			OAuthRequest request = new OAuthRequest(Verb.POST,
 					"https://graph.facebook.com/me/feed");
 			request.addBodyParameter("link",
-					"http://localhost:8888/question.do?id=" + v.getEncodedKey());
+					"http://localhost/question.do?id=" + v.getEncodedKey());
 			request.addBodyParameter("name", v.getText());
 			request.addBodyParameter("message",
 					"Please share your opinions!");

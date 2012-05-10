@@ -186,15 +186,15 @@ public class VoteAppController {
 			// post to wall
 			OAuthRequest request = new OAuthRequest(Verb.POST,
 					"https://graph.facebook.com/me/feed");
-			request.addBodyParameter("link",
-					"http://localhost/question.do?id=" + v.getEncodedKey());
+			request.addBodyParameter("link", "http://localhost/question.do?id="
+					+ v.getEncodedKey());
 			request.addBodyParameter("name", v.getText());
-			request.addBodyParameter("message",
-					"Please share your opinions!");
+			request.addBodyParameter("message", "Please share your opinions!");
 			facebookOAuthService
 					.signRequest(new Token(loginUser.getAccessToken(),
 							fbApiSecret), request);
 			request.send();
+			LOGGER.info("new question has been posted to fb wall.");
 		}
 		return mv;
 	}

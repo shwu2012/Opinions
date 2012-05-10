@@ -56,9 +56,11 @@ public class VoteServiceImpl implements VoteService {
 	@Override
 	public VoteTopic getVoteTopicById(String voteTopicEncodedId) {
 		VoteTopic voteTopic = voteTopicDao.getById(voteTopicEncodedId);
-		for (VoteOption o : voteTopic.getOptions()) {
-			for (VoteAction a : o.getActions()) {
-				// do nothing but to fetch all the vote actions
+		if (voteTopic != null) {
+			for (VoteOption o : voteTopic.getOptions()) {
+				for (VoteAction a : o.getActions()) {
+					// do nothing but to fetch all the vote actions
+				}
 			}
 		}
 		return voteTopic;
@@ -80,8 +82,16 @@ public class VoteServiceImpl implements VoteService {
 		VoteTopic voteTopic = null;
 		User user = userDao.getRandomUserHavingVoteTopics();
 		if (user != null) {
-			int randomNumber = new Random().nextInt(user.getVoteTopics().size());
+			int randomNumber = new Random()
+					.nextInt(user.getVoteTopics().size());
 			voteTopic = user.getVoteTopics().get(randomNumber);
+			if (voteTopic != null) {
+				for (VoteOption o : voteTopic.getOptions()) {
+					for (VoteAction a : o.getActions()) {
+						// do nothing but to fetch all the vote actions
+					}
+				}
+			}
 			LOGGER.info("pick random number: " + randomNumber);
 			LOGGER.info("pick random vote-topic: " + voteTopic.getText());
 		}
